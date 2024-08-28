@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+</head>
+<body>
+    <header>
+        <h1 style="text-align: center; padding: 50px;">News Details</h1>
+    </header>
+    <div class="secondcarddiv">
+        <div class="secondcardd">
+            <div class="card_image">
+                <div class="twotwothree" id="IdTable">
+                    <div class="two">
+                        <h1>{{ news_info1.title }}</h1>
+                        <br>
+                        <br>
+                        <p><strong>Description:</strong>{{ news_info1.description }}</p>
+                        <br>
+                        <br>
+                        <span>
+                            <h5>Source : {{  news_info1.url  }}</h5>
+                        </span>
+                        <br>
+                        <br>
+                        <hr>
+                        <hr>
+                        <a href="{{ news_info1.url }}"><h3 class="tags">Tags: {{ news_info1.tag }}</h3></a>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
