@@ -46,32 +46,41 @@
     <navv class="navbarnav">
         <a href="#home">Home</a>
         <a href="#features">Features</a>
-        <a href="#products">Products</a>
-        <a href="#professionals">Services</a>
-        <a href="#review">Review</a>
+        <a href="/chat">Ask Me🤖</a>
+        <a href="/resume">Check My Resume(CV)</a>
     
     </navv>
-    <div class="iconsnav">
+    <!-- <div class="iconsnav" style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+">
+        <button type="button" style="margin-bottom: 6px;"  class=" btn btn-primary" onclick="window.location.href='/login' ">Login</button>
         <button type="button"  class="btnnewnav btn" onclick="window.location.href='/job-posting' ">Post a Job</button>
+    </div> -->
+    <div class="j" style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+">
+    {% if username %}
+    <div class="welcome">
+        <div>Welcome, {{ username.split('@')[0] }}</div>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/logout'">Logout</button>
     </div>
+    {% else %}
+        <button type="button" style="margin-bottom: 6px;" class="btn btn-primary" onclick="window.location.href='/login'">Login</button>
+    {% endif %}
+    <div class="iconsnav">
+    <button type="button" class="btnnewnav btn" onclick="window.location.href='/job-posting'">Post a Job</button>
+</div>
+</div>
+
     
-    <!-- <form action="/" class="search-form" method="post">
-    <input type="search" name="search1" id="search-box" placeholder="Search Here
-    ... . .">
-    <button type="submit" for="search-box" class="fa fa-search"></button>
     
-    </form> -->
-    <form action="/search" method="post" class="search-formnav">
-        <input type="search" name="search1" id="search-box" placeholder="Search Here...">
-        <button type="submit" for="search-box" class="fa fa-search"></button>
-      </form>
-      
     
-    <div class="shopping-cartnav">
-        <div class="cart-itemsnav"></div>
-        <div class="totalnav">Total: ₹0.00</div>
-        <a href="/payment" class="btnnav" onclick="passvalues()">Checkout</a>
-    </div>
     
     
 </div>
@@ -105,11 +114,314 @@
 
     <div class="tabContainer">
         <div class="buttonContainer">
-            <button class="topbutton" onclick="showPanel(0)"><h3><i class="fa-solid fa-person-half-dress"></i> JK News</h3></button>
-            <button class="topbutton" onclick="showPanel(1)"><h3><i class="fa-regular fa-newspaper"></i> J&K Jobs</h3></button>
+            <button class="topbutton top2" onclick="showPanel(0)"><h3><i class="fa-solid fa-person-half-dress"></i> JK News</h3></button>
+            <button class="topbutton top2" onclick="showPanel(1)"><h3><i class="fa-regular fa-newspaper"></i> J&K Jobs</h3></button>
         </div>
-        <span class="tabPanel">
-                <h1 style="color: black; text-align: left; padding: 35px 65px; font-weight: 700;">Jobs Recruitment , <span id="date"></span></h1>
+        
+
+        <!-- start -->
+        <!-- <h1>Latest News</h1>
+<div id="IdHeadline181"></div>
+
+<script>
+    async function gkget_articles() {
+        try {
+            const response = await fetch('/api/gknews');
+            const news = await response.json();
+            const container = document.getElementById('IdHeadline181');
+
+            container.innerHTML = news.map(item => 
+                `<div class="containerr">
+                    <p>${item.gktitle}</p>
+                    <p>${item.gkdescription}</p>
+                    <img src="${item.gkimage_url}" alt="${item.gktitle}"/>
+                    <a href="${item.gklink_url}">Read more</a>
+                </div>`
+            ).join('');
+        } catch (error) {
+            console.error('Error fetching news:', error);
+        }
+    }
+
+    window.onload = gkget_articles; // Ensure this is called after the page loads
+</script> -->
+<!-- end -->
+
+
+
+<span class="tabPanel">
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    <h1>Latest News</h1>
+    <div id="IdHeadline181"></div>
+    
+    <script>
+        async function gkget_articles() {
+            try {
+                const response = await fetch('/api/gknews');
+                const news = await response.json();
+                const container = document.getElementById('IdHeadline181');
+    
+                container.innerHTML = news.map(item => 
+                    `<div class="containerr">
+                        <p>${item.gktitle}</p>
+                        <p>${item.gkdescription}</p>
+                        <img src="${item.gkimage_url}" alt="${item.gktitle}"/>
+                        <a href="${item.gklink_url}">Read more</a>
+                    </div>`
+                ).join('');
+            } catch (error) {
+                console.error('Error fetching news:', error);
+            }
+        }
+    
+        window.onload = gkget_articles; // Ensure this is called after the page loads
+    </script> -->
+
+
+
+    <div class="newspaper">
+        <main class="responsive-wrapper">
+            <div class="page-title">
+                <h1>Latest Updates</h1>
+            </div>
+            <div class="magazine-layout">
+                <div class="magazine-column">
+                    <article class="article">
+                        <div id="IdHeadline181"></div>
+                    </article>
+                    <article class="article">
+                        <div id="IdHeadline182"></div>
+                    </article>
+                </div>
+                <div class="magazine-column">
+                    <article class="article">
+                        <div id="IdHeadline183"></div>
+                    </article>
+                    <article class="article">
+                        <div id="IdHeadline188"></div>
+                    </article>
+                </div>
+                <div class="magazine-column">
+                    <article class="article">
+                        <div id="IdHeadline184"></div>
+                    </article>
+                    <article class="article">
+                        <div id="IdHeadline185"></div>
+                    </article>
+                </div>
+                <div class="magazine-column">
+                    <article class="article">
+                        <div id="IdHeadline186"></div>
+                    </article>
+                    <article class="article">
+                        <div id="IdHeadline187"></div>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+    async function gkget_articles() {
+        try {
+            const response = await fetch('/api/gknews');
+            const news = await response.json();
+    
+            // Map article data to the respective containers
+            const articleData = [
+                { containerId: 'IdHeadline181', itemIndex: 0, size: 'small' },
+                { containerId: 'IdHeadline182', itemIndex: 1, size: 'small' },
+                { containerId: 'IdHeadline183', itemIndex: 2, size: 'large' },
+                { containerId: 'IdHeadline184', itemIndex: 3, size: 'small' },
+                { containerId: 'IdHeadline185', itemIndex: 4, size: 'small' },
+                { containerId: 'IdHeadline186', itemIndex: 5, size: 'small' },
+                { containerId: 'IdHeadline187', itemIndex: 6, size: 'small' },
+                { containerId: 'IdHeadline188', itemIndex: 7, size: 'small' }
+            ];
+    
+            // Loop through articles and populate them
+            articleData.forEach(article => {
+                const container = document.getElementById(article.containerId);
+                const item = news[article.itemIndex];
+                container.innerHTML = `
+                <a href="${item.gklink_url}"><h2 class="article-title article-title--${article.size}">
+                        ${item.gktitle}
+                    </h2></a>
+                    <figure class="article-img">
+                        <img src="${item.gkimage_url}" alt="${item.gktitle}" />
+                    </figure>
+                    <div class="article-excerpt">
+                        <p>${item.gkdescription}</p>
+                    </div>`;
+            });
+        } catch (error) {
+            console.error('Error fetching news:', error);
+        }
+    }
+    
+    // Ensure this is called after the page loads
+    window.onload = gkget_articles;
+    </script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <h1 class="h1scroll">Jobs Recruitment , <span id="date"></span></h1>
 
     <script>
         // Function to get current date and month
@@ -145,7 +457,6 @@
                 </div>
                 <div class="swiper-button-next swiper-navBtn"></div>
                 <div class="swiper-button-prev swiper-navBtn"></div>
-                <div class="swiper-pagination"></div>
             </div>
 
 
@@ -158,7 +469,7 @@
             <br>
 
 
-            <h1 style="color: black; text-align: left; padding: 35px 65px; font-weight:700;">Jobs Updates , <span id="datee"></span></h1>
+            <h1 class="h1scroll">Jobs Updates , <span id="datee"></span></h1>
 
     <script>
         // Function to get current date and month
@@ -194,7 +505,6 @@
                 </div>
                 <div class="swiper-button-next2 swiper-navBtn"></div>
                 <div class="swiper-button-prev2 swiper-navBtn"></div>
-                <div class="swiper-pagination2"></div>
             </div>
 
             <br>
@@ -215,6 +525,7 @@
 
 
 
+            
 
 
 
@@ -243,75 +554,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div class="cards-list">
-            <div class="cardd 1">
-                <h1 style="color: black;">Job Notifications</h1>
-                <div style="color: black !important;" class="card_image" id="IdHeadline11">
-                    <!-- <div class="containerr">
-                        <div class="tickerr">
-                          <div class="titlee"><h5>Breaking News</h5></div>
-                          <div class="newss">
-                            <marquee width="100%">
-                              <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            </marquee>
-                          </div>
-                        </div>
-                      </div> -->
-                    </div></div></div>
-
-
-
-<script>
-    async function fetchNews4() {
-            try {
-                const response = await fetch('/api/news4');
-                const news = await response.json();
-                const container = document.getElementById('IdHeadline11');
-
-                container.innerHTML = news.map(item => `
-                <div class="containerr">
-                                  <p>
-                                    ${item.title}
-                                </p>
-                          </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error fetching news:', error);
-            }
-        }
-</script>
 
 
 
@@ -331,23 +573,18 @@
             <br>
             <br>
             <br>
+
+
+
+
+
+
+            
 
             <div class="cards-list">
                 <div class="cardd 1">
                     <h1 style="color: black;">Job Notifications</h1>
                     <div class="card_image" id="IdHeadline1">
-                        <!-- <div class="containerr">
-                            <div class="tickerr">
-                              <div class="titlee"><h5>Breaking News</h5></div>
-                              <div class="newss">
-                                <marquee width="100%">
-                                  <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </p>
-                                </marquee>
-                              </div>
-                            </div>
-                          </div> -->
                         </div>
                 </div>
                 
@@ -381,7 +618,7 @@
                 <div class="secondcardd">
                     <div class="card_image">
                         <h1 style="color: black">GOVT. Jobs</h1>
-                        <div class="twotwo" id="IdTable">
+                        <div class="twotwoo" id="IdTable">
                             <!-- <div class="two"> -->
                               <!-- <h1>Style Two
                                 <span>Example Tagline Text</span>
@@ -414,16 +651,17 @@
               </div> -->
 
 
-
-
-
-            
-
+</span>
 
 
 
 
-        </span>
+
+
+
+
+
+
         <div class="tabPanel">
             <div class="secondcarddiv">
                 <div class="secondcardd">
@@ -621,7 +859,7 @@ function viewMore(item) {
 
                 container.innerHTML = news.map(item => `
                 <a style="text-decoration: none;" href="${item.link}">
-                        <div class="two">
+                        <div class="twoo">
                             <h1>${item.organization}
                                 <span>${item.posts}</span>
                             </h1>
@@ -648,7 +886,7 @@ function viewMore(item) {
                             <div class="tickerr">
                               <div class="titlee"><h5>News</h5></div>
                               <div class="newss">
-                                <marquee width="100%">
+                                <marquee onMouseOver="this.stop()" onMouseOut="this.start()" width="100%" scrollamount="4">
                                   <p>
                                     ${item.title}
                                 </p>
@@ -693,7 +931,7 @@ function viewMore(item) {
                             <div class="tickerr">
                               <div class="titlee"><h5>News</h5></div>
                               <div class="newss">
-                                <marquee width="100%">
+                                <marquee onMouseOver="this.stop()" onMouseOut="this.start()" width="100%" scrollamount="4">
                                   <p>
                                     ${item.title}
                                 </p>
@@ -733,36 +971,37 @@ function viewMore(item) {
     </script>
     <script>
     var swiper = new Swiper(".slide-content", {
-    slidesPerView: 4,
-    spaceBetween: 25,
-    loop: true,
-    centerSlide: 'true',
-    fade: 'true',
-    grabCursor: 'true',
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-      dynamicBullets: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
+        slidesPerView: 4,
+        spaceBetween: 25,
+        loop: true,
+        centerSlide: 'true',
+        fade: 'true',
+        grabCursor: 'true',
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+          dynamicBullets: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
 
-    breakpoints:{
-        0: {
-            slidesPerView: 1,
-        },
-        280: {
-            slidesPerView: 2,
-        },
-        640: {
-            slidesPerView: 3,
-        },
-        950: {
-            slidesPerView: 4,
-        },
+        breakpoints: {
+    0: {
+      slidesPerView: 1, // For very small screens (less than 280px)
     },
+    280: {
+      slidesPerView: 1, // For screens with width 280px or above, only one slide
+    },
+    640: {
+      slidesPerView: 3, // For screens with width 640px or above, three slides
+    },
+    950: {
+      slidesPerView: 4, // For screens with width 950px or above, four slides
+    },
+  },
+
   });
     </script>
     <script>
@@ -783,20 +1022,21 @@ function viewMore(item) {
           prevEl: ".swiper-button-prev2",
         },
     
-        breakpoints:{
-            0: {
-                slidesPerView: 1,
-            },
-            280: {
-                slidesPerView: 2,
-            },
-            640: {
-                slidesPerView: 3,
-            },
-            950: {
-                slidesPerView: 4,
-            },
-        },
+        breakpoints: {
+    0: {
+      slidesPerView: 1, // For very small screens (less than 280px)
+    },
+    280: {
+      slidesPerView: 1, // For screens with width 280px or above, only one slide
+    },
+    640: {
+      slidesPerView: 3, // For screens with width 640px or above, three slides
+    },
+    950: {
+      slidesPerView: 4, // For screens with width 950px or above, four slides
+    },
+  },
+
       });
         </script>
 <script>

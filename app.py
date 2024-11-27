@@ -1,16 +1,159 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for, session
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
+import numpy as np
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from authlib.integrations.flask_client import OAuth
+import hashlib
+import os
+
+
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+app.secret_key = 'parrot'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jobs.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 db = SQLAlchemy(app)
+
+
+
+
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
+
+oauth = OAuth(app)
+
+google = oauth.register(
+    name='google',
+    client_id='643204173482-2ug4dnd8s1utm2go2i3ouucolnkn2dol.apps.googleusercontent.com',
+    client_secret='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',
+    access_token_url='https://oauth2.googleapis.com/token',
+    authorize_url='https://accounts.google.com/o/oauth2/v2/auth',
+    api_base_url='https://www.googleapis.com/oauth2/v2/',
+    client_kwargs={'scope': 'openid email profile'},
+    redirect_uri=os.getenv('GOOGLE_REDIRECT_URI', 'http://127.0.0.1:5000/authorize'),
+    jwks_uri='https://www.googleapis.com/oauth2/v3/certs'  # Explicitly set jwks_uri
+)
+
+# Models
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)  # Store hashed passwords
+    email = db.Column(db.String(100), unique=True)
+
+# Routes
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        
+        # Hash the password with MD5
+        hashed_password = hashlib.md5(password.encode()).hexdigest()
+        
+        new_user = User(username=username, password=hashed_password, email=email)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('register.html')
+
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         password = request.form['password']
+        
+#         # Hash the password with MD5
+#         hashed_password = hashlib.md5(password.encode()).hexdigest()
+        
+#         user = User.query.filter_by(username=username, password=hashed_password).first()
+#         if user:
+#             login_user(user)
+#             return redirect(url_for('index'))
+#         return "Invalid username or password"
+#     return render_template('login.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Hash the password with MD5
+        hashed_password = hashlib.md5(password.encode()).hexdigest()
+
+        # Check if user exists
+        user = User.query.filter_by(username=username, password=hashed_password).first()
+        if user:
+            login_user(user)
+            session['username'] = username  # Store username in the session
+            return redirect(url_for('index'))
+        return "Invalid username or password"
+    return render_template('login.html')
+
+
+
+
+@app.route('/google-login')
+def google_login():
+    redirect_uri = url_for('authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+@app.route('/authorize')
+def authorize():
+    token = google.authorize_access_token()  # Access token
+    user_info = google.get('userinfo').json()  # Get user info
+
+    # If the OAuth flow gives back the id_token, you can use it here
+    id_token = token.get('id_token')
+
+    # Verify the token if needed
+    # (optional) Add logic to verify the id_token using the jwks_uri
+
+    # Check if the user already exists in the DB
+    user = User.query.filter_by(email=user_info['email']).first()
+    if not user:
+        user = User(username=user_info['name'], email=user_info['email'], password='')
+        db.session.add(user)
+        db.session.commit()
+
+    login_user(user)
+    return redirect(url_for('dashboard'))
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    return f"Welcome, {current_user.username}! <a href='/logout'>Logout</a>"
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    session.pop('username', None)
+    return redirect(url_for('login'))
+
+
+
+
+
+
+
+
+
+
+
 
 class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,6 +165,74 @@ class Job(db.Model):
     industry_type = db.Column(db.String(100), nullable=False)
     functional_area = db.Column(db.String(100), nullable=False)
     skills = db.Column(db.Text, nullable=False)
+
+
+
+
+
+
+
+
+
+
+
+
+def gkscrape_news():
+    gknews_list = []
+    url = 'https://www.bbc.com/news/topics/cx1m7zg0wwzt'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+    gkresponse = requests.get(url, headers=headers)
+
+    if gkresponse.status_code == 200:
+        gksoup = BeautifulSoup(gkresponse.content, 'html.parser')
+
+        # Adjust class name according to actual structure
+        gkarticles = gksoup.find_all('div', {'class': 'sc-ae29827d-4 ypQFr'})  
+
+        for gkarticle in gkarticles:
+            gktitle_tag = gkarticle.find('h2', {'class': 'sc-8ea7699c-3 gRBdkE'})
+            gktitle_text = gktitle_tag.text.strip() if gktitle_tag else 'No title available'
+            print(gktitle_text)
+            
+            gkdescription_tag = gkarticle.find('p', {'class': 'sc-ae29827d-0 cNPpME'})
+            gkdescription_text = gkdescription_tag.text.strip() if gkdescription_tag else 'No description available'
+            
+            gkimage_tag = gkarticle.find('img',{'class':'sc-a34861b-0 efFcac'})
+            gkimage_url = gkimage_tag['src'] if gkimage_tag else '/static/m.png'
+            
+            gklink_tag = gkarticle.find('a', {'data-testid': 'internal-link'})
+            gklink_url = "https://www.bbc.com" + gklink_tag['href'] if gklink_tag else 'No link available'
+            
+            gknews_list.append({
+                'gktitle': gktitle_text,
+                'gkdescription': gkdescription_text,
+                'gkimage_url': gkimage_url,
+                'gklink_url': gklink_url
+            })
+
+        return gknews_list
+    else:
+        return []
+
+@app.route('/api/gknews')
+def get_gknews():
+    return jsonify(gkscrape_news())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -711,7 +922,13 @@ def extract_job_details(soup):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    username = session.get('username')
+    return render_template('index.html', username=username)
+
+@app.route('/improveresume')
+def index3449():
+    return render_template('improveresume.html')
+
 
 @app.route('/index2.html')
 def index2():
@@ -773,6 +990,11 @@ def get_articles():
     combined_data = articles + news
     return jsonify(combined_data)
 
+@app.route('/api/gknews')
+def gkget_articles():
+    gknews = gkscrape_news()
+    return jsonify(gknews)
+
 
 @app.route('/api/news2')
 def get_articles2():
@@ -798,6 +1020,341 @@ def get_articles5():
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from flask import Flask, request, render_template
+import pickle
+import docx
+import PyPDF2
+import re
+
+# Load the machine learning model and encoders
+svc_model = pickle.load(open('clf.pkl', 'rb'))
+tfidf = pickle.load(open('tfidf.pkl', 'rb'))
+le = pickle.load(open('encoder.pkl', 'rb'))
+
+
+def cleanResume(txt):
+    cleanText = re.sub(r'http\S+\s', ' ', txt)
+    cleanText = re.sub(r'RT|cc', ' ', cleanText)
+    cleanText = re.sub(r'#\S+\s', ' ', cleanText)
+    cleanText = re.sub(r'@\S+', '  ', cleanText)
+    cleanText = re.sub(r'[%s]' % re.escape("""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""), ' ', cleanText)
+    cleanText = re.sub(r'[^\x00-\x7f]', ' ', cleanText)
+    cleanText = re.sub(r'\s+', ' ', cleanText)
+    return cleanText
+
+# Function to extract text from PDF
+def extract_text_from_pdf(file):
+    pdf_reader = PyPDF2.PdfReader(file)
+    text = ''
+    for page in pdf_reader.pages:
+        text += page.extract_text()
+    return text
+
+# Function to extract text from DOCX
+def extract_text_from_docx(file):
+    doc = docx.Document(file)
+    text = ''
+    for paragraph in doc.paragraphs:
+        text += paragraph.text + '\n'
+    return text
+
+# Function to extract text from TXT with explicit encoding handling
+def extract_text_from_txt(file):
+    try:
+        text = file.read().decode('utf-8')
+    except UnicodeDecodeError:
+        text = file.read().decode('latin-1')
+    return text
+
+# Function to handle file upload and extraction
+def handle_file_upload(uploaded_file):
+    file_extension = uploaded_file.filename.split('.')[-1].lower()
+    if file_extension == 'pdf':
+        text = extract_text_from_pdf(uploaded_file)
+    elif file_extension == 'docx':
+        text = extract_text_from_docx(uploaded_file)
+    elif file_extension == 'txt':
+        text = extract_text_from_txt(uploaded_file)
+    else:
+        raise ValueError("Unsupported file type. Please upload a PDF, DOCX, or TXT file.")
+    return text
+
+# Function to predict the category of a resume
+def pred(input_resume):
+    cleaned_text = cleanResume(input_resume)
+    vectorized_text = tfidf.transform([cleaned_text]).toarray()
+    predicted_category = svc_model.predict(vectorized_text)
+    predicted_category_name = le.inverse_transform(predicted_category)
+    return predicted_category_name[0], predicted_category  # Return category and prediction score
+
+# Function to calculate ATS score based on job keywords
+def calculate_ats_score(resume_text, job_keywords):
+    if len(job_keywords) == 0:
+        return 0.0
+    
+    match_count = sum(1 for keyword in job_keywords if keyword.lower() in resume_text.lower())
+
+    if match_count == 0:
+        return 0.0
+
+    ats_score = (match_count / len(job_keywords)) * 100
+
+    # Ensure ats_score is numeric
+    if isinstance(ats_score, (int, float)):
+        return round(ats_score, 2)
+    else:
+        print(f"Error: Invalid ats_score type: {type(ats_score)}")  # Debugging log
+        return 0.0
+
+
+
+# Function to calculate ATS score based on model prediction confidence
+import numpy as np
+
+# Function to calculate ATS score based on model prediction confidence
+import numpy as np
+
+def calculate_model_ats_score(prediction_score):
+    print(f"Debug: prediction_score type = {type(prediction_score)}")
+    print(f"Debug: prediction_score = {prediction_score}")
+
+    # Check if prediction_score is a list, numpy array, or similar iterable
+    if isinstance(prediction_score, (list, np.ndarray)):
+        if len(prediction_score) > 0:
+            confidence_score = max(prediction_score)  # Get the maximum score
+            print(f"Debug: confidence_score = {confidence_score}")
+
+            # Check if confidence_score is numeric
+            if isinstance(confidence_score, (int, float)):
+                ats_score = confidence_score * 100
+                print(f"Debug: ats_score = {ats_score}")
+                return round(ats_score, 2)  # Round to 2 decimal places
+            else:
+                print(f"Error: confidence_score is not numeric: {confidence_score}")
+                return 0.0  # Return a default value if not numeric
+        else:
+            print("Error: prediction_score is an empty list/array.")
+            return 0.0
+    else:
+        print(f"Error: prediction_score is not a list or array: {prediction_score}")
+        return 0.0
+
+
+@app.route('/resume', methods=['GET', 'POST'])
+def handle_resume():
+    if request.method == 'POST':
+        # Handling POST request: File upload
+        resume_file = request.files['resume']
+        
+        # Use the handle_file_upload function to extract text from the uploaded file
+        resume_text = handle_file_upload(resume_file)
+        
+        job_keywords = ['python', 'machine learning', 'data science']  # Example keywords
+        ats_score_keywords = calculate_ats_score(resume_text, job_keywords)
+        
+        # Example prediction score
+        prediction_score = [0.85]
+        ats_score_model = calculate_model_ats_score(prediction_score)
+        
+        # Extract experience and skills
+        experience = extract_experience(resume_text)
+        skills = extract_skills(resume_text)
+        
+        # Predict category of the resume
+        category, _ = pred(resume_text)
+        
+        return render_template('resume.html', 
+                               category=category, 
+                               ats_score_keywords=ats_score_keywords, 
+                               ats_score_model=ats_score_model, 
+                               experience=experience, 
+                               skills=skills, 
+                               resume_text=resume_text)
+    else:
+        # Handling GET request: Render the form for resume upload
+        return render_template('resume.html')
+# Function to extract experience details from resume text
+def extract_experience(text):
+    experience = re.findall(r'(\d+)\s?years?\s?(of\s?experience)?', text, re.IGNORECASE)
+    return experience
+
+# Function to extract skills from resume text
+def extract_skills(text):
+    skills = re.findall(r'\b(Python|Java|C\+\+|JavaScript|SQL|HTML|CSS)\b', text, re.IGNORECASE)
+    return skills
+
+
+
+
+import json
+
+from flask import Flask, render_template, request, jsonify
+import torch
+import random
+from model import NeuralNet
+from nltk_utils import bag_of_words, tokenize
+
+
+# Load model and data
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+FILE = "data.pth"
+data = torch.load(FILE)
+
+input_size = data["input_size"]
+hidden_size = data["hidden_size"]
+output_size = data["output_size"]
+all_words = data['all_words']
+tags = data['tags']
+model_state = data["model_state"]
+
+model = NeuralNet(input_size, hidden_size, output_size).to(device)
+model.load_state_dict(model_state)
+model.eval()
+
+with open('intents.json', 'r') as json_data:
+    intents = json.load(json_data)
+
+bot_name = "Amaan"
+
+@app.route("/chat")
+def home():
+    return render_template("chat.html")
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_message = request.json.get("message")
+    if not user_message:
+        return jsonify({"error": "Empty message"}), 400
+
+    sentence = tokenize(user_message)
+    X = bag_of_words(sentence, all_words)
+    X = X.reshape(1, X.shape[0])
+    X = torch.from_numpy(X).to(device)
+
+    output = model(X)
+    _, predicted = torch.max(output, dim=1)
+
+    tag = tags[predicted.item()]
+    probs = torch.softmax(output, dim=1)
+    prob = probs[0][predicted.item()]
+
+    if prob.item() > 0.75:
+        for intent in intents['intents']:
+            if tag == intent["tag"]:
+                response = random.choice(intent['responses'])
+                return jsonify({"bot": response})
+    else:
+        return jsonify({"bot": "I do not understand...Write full question"})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# deactivate
+# python -m venv myenv
+# source myenv/bin/activate
+
+
+
+
 
 
 if __name__ == '__main__':

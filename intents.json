@@ -1,0 +1,795 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "Hello",
+        "Good day",
+        "How are you?",
+        "Is anyone there?",
+        "What's up?"
+      ],
+      "responses": [
+        "Hello! I'm here to help you with questions about education and jobs.",
+        "Hi there! How can I assist you today?",
+        "Hey! I'm ready to provide information about education and careers.",
+        "Hello! Feel free to ask me anything about learning or job opportunities."
+      ]
+    },
+    {
+      "tag": "who",
+      "patterns": [
+        "Who created you?",
+        "Who is the developer?",
+        "Tell me about your creator",
+        "Who are you?"
+      ],
+      "responses": [
+        "I was developed by Amaan Iqbal to assist with education and career-related queries.",
+        "I am a virtual assistant created to guide you in your educational and career journey, thanks to Amaan Iqbal."
+      ]
+    },
+    {
+      "tag": "assistance",
+      "patterns": [
+        "What can you do for me?",
+        "How can you help?",
+        "What services do you provide?",
+        "Can you assist me?",
+        "What are you capable of?",
+        "What support can you offer?"
+      ],
+      "responses": [
+        "I can provide answers related to education, career guidance, job opportunities, and tips for personal and professional growth.",
+        "I assist with queries about courses, study tips, resume building, interview preparation, and job applications.",
+        "My expertise includes providing insights into learning strategies, job markets, and skill development.",
+        "I can guide you on topics like education planning, career paths, and finding the right resources for your goals."
+      ]
+    },
+    {
+      "tag": "resume_tips",
+      "patterns": [
+        "How can I improve my resume?",
+        "Tips for a good resume?",
+        "How to make my resume stand out?",
+        "Resume improvement tips",
+        "What should I include in my resume?"
+      ],
+      "responses": [
+        "Focus on clarity and highlight your achievements and skills relevant to the job.",
+        "Use action verbs and quantify your accomplishments where possible (e.g., 'Increased sales by 20%').",
+        "Keep it concise, ideally 1-2 pages, and tailor it to each job application.",
+        "Ensure your contact information is up to date, and include a professional summary or objective statement."
+      ]
+    },
+    {
+      "tag": "internship",
+      "patterns": [
+        "How do I find internships?",
+        "Tips for getting an internship?",
+        "Where can I apply for internships?",
+        "Internship opportunities",
+        "Best ways to get internships?"
+      ],
+      "responses": [
+        "Check platforms like LinkedIn, Internshala, and Handshake for internship listings.",
+        "Network with professionals in your field and attend career fairs.",
+        "Tailor your resume and cover letter to each internship application.",
+        "Demonstrate your interest and skills through personal projects, certifications, or volunteering."
+      ]
+    },
+    {
+      "tag": "job_search",
+      "patterns": [
+        "How to find a job?",
+        "Best ways to search for jobs?",
+        "Where should I apply for jobs?",
+        "Tips for job searching?",
+        "How can I find relevant jobs?"
+      ],
+      "responses": [
+        "Use job portals like LinkedIn, Glassdoor, and Indeed to find openings.",
+        "Network within your industry and leverage referrals from your contacts.",
+        "Keep your resume and LinkedIn profile updated, and apply to positions that align with your skills and interests.",
+        "Prepare for interviews by researching the company and practicing common questions."
+      ]
+    },
+    {
+      "tag": "education_guidance",
+      "patterns": [
+        "What should I study?",
+        "Which field should I choose?",
+        "How to decide on a major?",
+        "Guidance for further education?",
+        "How to choose the right course?"
+      ],
+      "responses": [
+        "Identify your interests and career goals to choose a field that aligns with them.",
+        "Consider job market trends and the future demand for skills in your chosen area.",
+        "Seek advice from mentors, professors, or career counselors to gain insights.",
+        "Explore introductory courses online to test your interest in a particular field."
+      ]
+    },
+    {
+      "tag": "interview_tips",
+      "patterns": [
+        "How can I prepare for interviews?",
+        "What are common interview questions?",
+        "Interview tips for beginners",
+        "How to ace a job interview?",
+        "What to do during an interview?"
+      ],
+      "responses": [
+        "Research the company and understand its values, products, and culture.",
+        "Practice answering common interview questions, including behavioral ones.",
+        "Dress professionally, be punctual, and maintain a confident posture.",
+        "Ask insightful questions about the role and company at the end of the interview."
+      ]
+    },
+    {
+      "tag": "study_tips",
+      "patterns": [
+        "How to study effectively?",
+        "Tips for better learning?",
+        "How can I improve my grades?",
+        "Best study techniques?",
+        "How to avoid procrastination while studying?"
+      ],
+      "responses": [
+        "Create a study schedule and stick to it to build a routine.",
+        "Use active learning methods like summarizing, questioning, and teaching others.",
+        "Take regular breaks using techniques like the Pomodoro method.",
+        "Eliminate distractions and set specific goals for each study session."
+      ]
+    },
+    {
+      "tag": "scholarship",
+      "patterns": [
+        "How can I apply for scholarships?",
+        "Tips for winning scholarships?",
+        "Where to find scholarships?",
+        "Scholarship opportunities",
+        "How to increase my chances of getting a scholarship?"
+      ],
+      "responses": [
+        "Look for scholarships on platforms like Scholarship.com, Fastweb, and university websites.",
+        "Prepare strong application materials, including essays and recommendation letters.",
+        "Maintain a good academic record and participate in extracurricular activities.",
+        "Apply to multiple scholarships to increase your chances."
+      ]
+    },
+    {
+      "tag": "career_growth",
+      "patterns": [
+        "How can I grow in my career?",
+        "Tips for professional development?",
+        "What should I do to get promoted?",
+        "How to advance my career?",
+        "Best ways to achieve career growth?"
+      ],
+      "responses": [
+        "Focus on building new skills and staying updated with industry trends.",
+        "Take on challenging projects to demonstrate your capabilities.",
+        "Network with professionals and seek mentorship opportunities.",
+        "Set clear career goals and create a roadmap to achieve them."
+      ]
+    },
+    {
+      "tag": "remote_work",
+      "patterns": [
+        "How can I find remote jobs?",
+        "Tips for working remotely?",
+        "Where to apply for remote positions?",
+        "Best platforms for remote jobs?",
+        "How to stay productive while working remotely?"
+      ],
+      "responses": [
+        "Look for remote opportunities on platforms like Remote.co, We Work Remotely, and FlexJobs.",
+        "Create a dedicated workspace and establish a routine to stay productive.",
+        "Communicate effectively with your team and use tools like Slack or Zoom.",
+        "Update your resume to highlight skills suitable for remote work, like self-motivation and time management."
+      ]
+    },
+    {
+      "tag": "freelancing",
+      "patterns": [
+        "How do I start freelancing?",
+        "Tips for becoming a freelancer?",
+        "Best platforms for freelancing?",
+        "How can I find freelance clients?",
+        "Is freelancing a good career option?"
+      ],
+      "responses": [
+        "Start by identifying your skills and building a portfolio to showcase your work.",
+        "Use platforms like Upwork, Fiverr, and Toptal to find clients.",
+        "Set clear rates for your services and learn how to negotiate effectively.",
+        "Build a strong online presence through LinkedIn, personal websites, or social media."
+      ]
+    },
+    {
+      "tag": "coding_skills",
+      "patterns": [
+        "How can I improve my coding skills?",
+        "Tips for learning programming?",
+        "What are the best resources for coding?",
+        "How do I practice coding effectively?",
+        "How to prepare for coding interviews?"
+      ],
+      "responses": [
+        "Practice coding regularly on platforms like LeetCode, HackerRank, and Codewars.",
+        "Build personal projects to apply what you've learned in real-world scenarios.",
+        "Learn from online courses on platforms like Udemy, Coursera, or Codecademy.",
+        "For coding interviews, focus on data structures, algorithms, and problem-solving skills."
+      ]
+    },
+    {
+      "tag": "time_management",
+      "patterns": [
+        "How to manage time effectively?",
+        "Best time management strategies?",
+        "How to balance work and study?",
+        "Time management tips for students?",
+        "How to avoid wasting time?"
+      ],
+      "responses": [
+        "Prioritize tasks using tools like to-do lists or apps like Trello and Notion.",
+        "Break large tasks into smaller, manageable steps to avoid feeling overwhelmed.",
+        "Avoid multitasking and focus on one task at a time for better efficiency.",
+        "Use techniques like time-blocking or the Eisenhower Matrix to stay organized."
+      ]
+    },
+    {
+      "tag": "personal_branding",
+      "patterns": [
+        "What is personal branding?",
+        "How can I build my personal brand?",
+        "Why is personal branding important?",
+        "Tips for creating a strong personal brand?",
+        "How do I showcase my skills online?"
+      ],
+      "responses": [
+        "Define your unique strengths and what sets you apart professionally.",
+        "Create and update your LinkedIn profile to highlight your skills and achievements.",
+        "Share knowledge through blogs, videos, or social media to establish yourself as an expert.",
+        "Consistently network and engage with professionals in your field."
+      ]
+    },
+    {
+      "tag": "graduate_school",
+      "patterns": [
+        "Should I go to grad school?",
+        "Tips for applying to graduate school?",
+        "What are the benefits of grad school?",
+        "How to prepare for grad school applications?",
+        "How to choose the right grad program?"
+      ],
+      "responses": [
+        "Consider your career goals and whether a graduate degree aligns with them.",
+        "Research programs and universities thoroughly to find the best fit for your interests.",
+        "Prepare strong application materials, including a personal statement and recommendation letters.",
+        "Look into funding options like scholarships, assistantships, or fellowships."
+      ]
+    },
+    {
+      "tag": "networking",
+      "patterns": [
+        "How can I network effectively?",
+        "Tips for networking?",
+        "How to connect with professionals?",
+        "Best ways to grow my network?",
+        "Why is networking important?"
+      ],
+      "responses": [
+        "Attend industry events, conferences, and meetups to meet like-minded professionals.",
+        "Engage on platforms like LinkedIn by commenting on posts and sharing insights.",
+        "Follow up with people you meet and maintain relationships through regular communication.",
+        "Offer value to your network by sharing useful information or helping with their needs."
+      ]
+    },
+    {
+      "tag": "soft_skills",
+      "patterns": [
+        "What are soft skills?",
+        "Why are soft skills important?",
+        "How can I improve my communication skills?",
+        "Tips for building teamwork skills?",
+        "Best ways to develop leadership skills?"
+      ],
+      "responses": [
+        "Soft skills include communication, teamwork, adaptability, and problem-solving abilities.",
+        "Practice active listening and articulate your thoughts clearly to improve communication skills.",
+        "Collaborate on group projects or volunteer for team activities to enhance teamwork abilities.",
+        "Take up leadership roles in clubs or organizations to develop leadership skills."
+      ]
+    },
+    {
+      "tag": "technical_skills",
+      "patterns": [
+        "What are technical skills?",
+        "How can I learn new technical skills?",
+        "What technical skills are in demand?",
+        "Tips for acquiring technical skills?",
+        "How do I showcase technical skills on my resume?"
+      ],
+      "responses": [
+        "Technical skills are job-specific abilities like coding, data analysis, or graphic design.",
+        "Learn new skills through online courses, certifications, and hands-on projects.",
+        "In-demand skills vary by industry but often include programming, cloud computing, and data science.",
+        "Showcase your technical skills by listing them in a dedicated section on your resume."
+      ]
+    },
+    {
+      "tag": "certifications",
+      "patterns": [
+        "What are the best certifications for my career?",
+        "How do certifications help?",
+        "Which certifications should I pursue?",
+        "Are certifications worth it?",
+        "How can I get certified in my field?"
+      ],
+      "responses": [
+        "Certifications demonstrate expertise and can make your resume stand out.",
+        "Research certifications relevant to your industry, like PMP, AWS, or Google certifications.",
+        "Online platforms like Coursera, Udemy, and LinkedIn Learning offer affordable certification programs.",
+        "Make sure the certification aligns with your career goals and is recognized in your field."
+      ]
+    },
+    {
+      "tag": "interview_preparation",
+      "patterns": [
+        "How do I prepare for an interview?",
+        "Tips for acing interviews?",
+        "What questions should I expect in an interview?",
+        "How can I improve my interview skills?",
+        "What are the common mistakes in interviews?"
+      ],
+      "responses": [
+        "Research the company and role thoroughly before the interview.",
+        "Practice answering common questions like 'Tell me about yourself' and 'What are your strengths and weaknesses?'",
+        "Prepare examples from your experience that demonstrate key skills and achievements.",
+        "Dress appropriately and arrive early to show professionalism.",
+        "Avoid mistakes like failing to ask questions or speaking negatively about previous employers."
+      ]
+    },
+    {
+      "tag": "job_search_strategies",
+      "patterns": [
+        "How can I find a job?",
+        "What are the best job search strategies?",
+        "How to effectively look for jobs?",
+        "Best platforms for job hunting?",
+        "How do I get noticed by recruiters?"
+      ],
+      "responses": [
+        "Tailor your resume and cover letter to each job you apply for.",
+        "Use platforms like LinkedIn, Indeed, and Glassdoor to find opportunities.",
+        "Network with professionals in your field and let them know you're looking.",
+        "Apply for jobs that align with your skills and career goals.",
+        "Follow up after submitting applications to show your interest."
+      ]
+    },
+    {
+      "tag": "entrepreneurship",
+      "patterns": [
+        "How do I start my own business?",
+        "What are the challenges of entrepreneurship?",
+        "Tips for starting a startup?",
+        "How can I become an entrepreneur?",
+        "What skills do I need to run a business?"
+      ],
+      "responses": [
+        "Start with a clear business plan outlining your goals and strategies.",
+        "Identify your target market and research their needs.",
+        "Learn essential skills like financial management, marketing, and sales.",
+        "Be prepared for challenges like securing funding and managing risks.",
+        "Build a strong network of mentors and advisors to guide you."
+      ]
+    },
+    {
+      "tag": "work_life_balance",
+      "patterns": [
+        "How can I balance work and personal life?",
+        "What are the best work-life balance tips?",
+        "How to avoid burnout?",
+        "How to manage stress from work?",
+        "Tips for maintaining a healthy lifestyle while working?"
+      ],
+      "responses": [
+        "Set clear boundaries between work and personal time.",
+        "Prioritize tasks and avoid overcommitting yourself.",
+        "Take regular breaks and practice mindfulness or relaxation techniques.",
+        "Make time for hobbies, exercise, and spending time with loved ones.",
+        "Communicate openly with your employer about your workload if necessary."
+      ]
+    },
+    {
+      "tag": "career_switch",
+      "patterns": [
+        "How can I switch careers?",
+        "Is it possible to change my career path?",
+        "What are the steps to change careers?",
+        "Tips for transitioning to a new field?",
+        "How do I make a career shift?"
+      ],
+      "responses": [
+        "Identify the skills and experience needed for your desired field.",
+        "Take courses or earn certifications to bridge skill gaps.",
+        "Update your resume and LinkedIn profile to highlight transferable skills.",
+        "Network with professionals in your target industry to learn and find opportunities.",
+        "Be patient and open to starting at an entry-level position if needed."
+      ]
+    },
+    {
+      "tag": "internship_search",
+      "patterns": [
+        "How do I find internships?",
+        "Best platforms for internship search?",
+        "How can I get an internship with no experience?",
+        "Tips for applying to internships?",
+        "How to stand out as an intern?"
+      ],
+      "responses": [
+        "Search for internships on platforms like LinkedIn, Internshala, and Glassdoor.",
+        "Create a strong resume showcasing relevant coursework and projects.",
+        "Leverage your network, including professors and alumni, to find opportunities.",
+        "Customize your application for each internship to highlight relevant skills.",
+        "Show enthusiasm, adaptability, and willingness to learn during your internship."
+      ]
+    },
+    {
+      "tag": "professional_ethics",
+      "patterns": [
+        "What are professional ethics?",
+        "Why is workplace ethics important?",
+        "How do I handle ethical dilemmas at work?",
+        "What are examples of workplace ethics?",
+        "Tips for maintaining professionalism?"
+      ],
+      "responses": [
+        "Professional ethics involve integrity, accountability, and respect in the workplace.",
+        "Always follow company policies and maintain confidentiality when required.",
+        "Handle ethical dilemmas by seeking advice from a supervisor or HR if needed.",
+        "Examples include being honest, avoiding conflicts of interest, and treating colleagues fairly.",
+        "Maintain professionalism by communicating effectively and being punctual and reliable."
+      ]
+    },
+    {
+      "tag": "study_tips",
+      "patterns": [
+        "How can I study effectively?",
+        "Best study tips for exams?",
+        "How do I stay focused while studying?",
+        "What are the best learning strategies?",
+        "How to retain what I study?"
+      ],
+      "responses": [
+        "Use techniques like active recall and spaced repetition to improve retention.",
+        "Study in a distraction-free environment and take regular breaks.",
+        "Break down topics into manageable chunks and set clear goals for each session.",
+        "Practice solving past papers or sample questions for better understanding.",
+        "Get enough sleep and maintain a healthy diet to keep your mind sharp."
+      ]
+    },
+    {
+      "tag": "online_learning",
+      "patterns": [
+        "How do I learn online?",
+        "What are the best online learning platforms?",
+        "Tips for studying online?",
+        "How to stay motivated during online courses?",
+        "Is online learning effective?"
+      ],
+      "responses": [
+        "Online learning is effective if you stay disciplined and manage your time well.",
+        "Platforms like Coursera, edX, and Udemy offer courses on a wide range of topics.",
+        "Set a schedule for your study sessions and stick to it.",
+        "Engage actively with the content by taking notes and participating in discussions.",
+        "Reward yourself after completing milestones to stay motivated."
+      ]
+    },
+    {
+      "tag": "networking",
+      "patterns": [
+        "How do I network effectively?",
+        "What is professional networking?",
+        "Why is networking important?",
+        "How can I expand my network?",
+        "Tips for building connections in my field?"
+      ],
+      "responses": [
+        "Attend industry events, seminars, and webinars to meet professionals in your field.",
+        "Use platforms like LinkedIn to connect with peers, mentors, and industry leaders.",
+        "Join professional organizations or groups relevant to your career interests.",
+        "Be proactive in reaching out to people, but always approach with genuine interest.",
+        "Offer value in your interactions, such as sharing insights or helping others when possible."
+      ]
+    },
+    {
+      "tag": "soft_skills",
+      "patterns": [
+        "What are soft skills?",
+        "Why are soft skills important?",
+        "How can I improve my communication skills?",
+        "What soft skills do employers look for?",
+        "Tips for developing teamwork skills?"
+      ],
+      "responses": [
+        "Soft skills include communication, teamwork, adaptability, and problem-solving.",
+        "Employers value these skills as they enhance collaboration and productivity.",
+        "To improve communication, practice active listening and clear articulation.",
+        "Enhance teamwork by being open to feedback, respecting others' opinions, and contributing actively.",
+        "Develop adaptability by staying positive during changes and learning new approaches quickly."
+      ]
+    },
+    {
+      "tag": "freelancing",
+      "patterns": [
+        "How do I start freelancing?",
+        "Best freelancing platforms?",
+        "What skills are in demand for freelancing?",
+        "How do I get clients as a freelancer?",
+        "Tips for managing freelance work?"
+      ],
+      "responses": [
+        "Create a portfolio showcasing your skills and past work.",
+        "Join platforms like Upwork, Fiverr, and Freelancer to find freelance opportunities.",
+        "Skills like graphic design, content writing, web development, and digital marketing are in demand.",
+        "Build a strong profile and ask satisfied clients for reviews and referrals.",
+        "Manage your time effectively and set clear boundaries to avoid burnout."
+      ]
+    },
+    {
+      "tag": "higher_education",
+      "patterns": [
+        "Should I pursue higher education?",
+        "What are the benefits of a master's degree?",
+        "How do I choose the right program for me?",
+        "Tips for applying to graduate school?",
+        "Is higher education worth it?"
+      ],
+      "responses": [
+        "Higher education can enhance your knowledge, skills, and career prospects.",
+        "Consider factors like your career goals, program reputation, and financial investment.",
+        "Research schools and programs thoroughly to find the best fit for your interests and aspirations.",
+        "Prepare a strong application with a compelling statement of purpose, recommendation letters, and academic records.",
+        "Evaluate the return on investment based on potential career opportunities in your field."
+      ]
+    },
+    {
+      "tag": "global_opportunities",
+      "patterns": [
+        "How can I work abroad?",
+        "What are the best countries for job opportunities?",
+        "How do I apply for jobs internationally?",
+        "What skills are needed to work globally?",
+        "Tips for relocating for a job?"
+      ],
+      "responses": [
+        "Research visa requirements and job markets in your target countries.",
+        "Acquire skills that are globally in demand, like programming, language proficiency, or certifications.",
+        "Use platforms like LinkedIn and country-specific job portals to find opportunities.",
+        "Prepare for cultural differences and learn about workplace norms in your chosen country.",
+        "Plan your relocation carefully, including finances, housing, and legal documentation."
+      ]
+    },
+    {
+      "tag": "career_growth",
+      "patterns": [
+        "How do I grow in my career?",
+        "Tips for professional development?",
+        "How can I get promoted?",
+        "What should I focus on for career advancement?",
+        "How do I achieve long-term career success?"
+      ],
+      "responses": [
+        "Set clear goals and create a plan for achieving them step by step.",
+        "Continuously learn and upgrade your skills to stay relevant in your field.",
+        "Seek feedback from peers and supervisors to identify areas for improvement.",
+        "Take on new challenges and responsibilities to demonstrate your potential.",
+        "Network actively and maintain strong relationships with mentors and colleagues."
+      ]
+    },
+    {
+      "tag": "technical_skills",
+      "patterns": [
+        "What technical skills should I learn?",
+        "How do I improve my coding skills?",
+        "What are in-demand skills in technology?",
+        "How do I build technical expertise?",
+        "What resources are best for learning technical skills?"
+      ],
+      "responses": [
+        "Learn programming languages like Python, JavaScript, or Java, depending on your goals.",
+        "Understand concepts like data structures, algorithms, and database management.",
+        "Focus on trending areas like AI, machine learning, cloud computing, or cybersecurity.",
+        "Build projects and contribute to open-source platforms to gain practical experience.",
+        "Use resources like Codecademy, freeCodeCamp, and Coursera for structured learning."
+      ]
+    },
+    {
+      "tag": "personal_branding",
+      "patterns": [
+        "What is personal branding?",
+        "How do I build a personal brand?",
+        "Why is personal branding important?",
+        "Tips for improving my online presence?",
+        "How do I showcase my skills to employers?"
+      ],
+      "responses": [
+        "Personal branding is about establishing your unique professional identity.",
+        "Create a strong LinkedIn profile and share content relevant to your field.",
+        "Showcase your expertise through a personal website or portfolio.",
+        "Engage with your network by commenting on and sharing insightful content.",
+        "Participate in webinars, podcasts, or public speaking events to increase visibility."
+      ]
+    },
+    {
+      "tag": "volunteering",
+      "patterns": [
+        "How can volunteering help my career?",
+        "Where can I volunteer to gain experience?",
+        "What are the benefits of volunteering?",
+        "Can volunteering improve my skills?",
+        "Tips for finding volunteering opportunities?"
+      ],
+      "responses": [
+        "Volunteering helps build skills like teamwork, communication, and leadership.",
+        "It allows you to gain experience and showcase your commitment to meaningful causes.",
+        "Look for opportunities on platforms like VolunteerMatch or local organizations.",
+        "Highlight your volunteering experience on your resume to show your dedication.",
+        "Choose roles that align with your career interests for maximum impact."
+      ]
+    },
+    {
+      "tag": "mbbs_general",
+      "patterns": [
+        "What is MBBS?",
+        "How do I become a doctor?",
+        "What does MBBS stand for?",
+        "Tell me about MBBS.",
+        "Is MBBS a good career choice?"
+      ],
+      "responses": [
+        "MBBS stands for Bachelor of Medicine, Bachelor of Surgery. It is an undergraduate degree required to practice as a doctor.",
+        "To pursue MBBS, you must have a strong foundation in biology, chemistry, and physics during your high school education.",
+        "Becoming a doctor requires dedication, strong academics, and a willingness to serve the community.",
+        "MBBS is a rewarding career for those passionate about healthcare and helping others."
+      ]
+    },
+    {
+      "tag": "mbbs_eligibility",
+      "patterns": [
+        "What are the eligibility criteria for MBBS?",
+        "How do I qualify for MBBS?",
+        "What are the entrance requirements for MBBS?",
+        "Who can apply for MBBS?",
+        "Do I need to clear an entrance exam for MBBS?"
+      ],
+      "responses": [
+        "Eligibility for MBBS typically includes completing high school with subjects like Biology, Chemistry, and Physics.",
+        "You need a good score in entrance exams such as NEET (National Eligibility cum Entrance Test) in India or equivalent exams in other countries.",
+        "The age limit for MBBS admissions varies but is usually between 17 and 25 years at the time of admission.",
+        "Minimum percentage requirements for high school are generally around 50% for general candidates and 40% for reserved categories in India."
+      ]
+    },
+    {
+      "tag": "mbbs_scope",
+      "patterns": [
+        "What can I do after MBBS?",
+        "What are the career options after MBBS?",
+        "What specializations are available after MBBS?",
+        "Can I study abroad after MBBS?",
+        "What is the scope of MBBS?"
+      ],
+      "responses": [
+        "After MBBS, you can specialize in fields like surgery, pediatrics, gynecology, or cardiology by pursuing postgraduate degrees (MD, MS).",
+        "You can also work in public health, hospital management, medical research, or clinical practice.",
+        "Studying abroad for advanced medical courses or specializations is a popular option for MBBS graduates.",
+        "Career opportunities are abundant in government and private hospitals, healthcare startups, and even administrative roles in health organizations."
+      ]
+    },
+    {
+      "tag": "engineering_general",
+      "patterns": [
+        "What is engineering?",
+        "Tell me about engineering.",
+        "What are the types of engineering?",
+        "Is engineering a good career?",
+        "What does an engineer do?"
+      ],
+      "responses": [
+        "Engineering involves designing, building, and maintaining systems, structures, and technologies to solve real-world problems.",
+        "Popular branches of engineering include Computer Science, Mechanical, Electrical, Civil, and Electronics Engineering.",
+        "Engineering is a great career choice for problem-solvers and innovators who enjoy applying science and math.",
+        "Engineers work in diverse fields like software development, construction, manufacturing, and renewable energy."
+      ]
+    },
+    {
+      "tag": "engineering_eligibility",
+      "patterns": [
+        "What are the eligibility criteria for engineering?",
+        "How do I get into an engineering college?",
+        "What are the entrance requirements for engineering?",
+        "Who can apply for engineering?",
+        "Do I need to clear an entrance exam for engineering?"
+      ],
+      "responses": [
+        "To pursue engineering, you need to complete high school with a focus on Physics, Chemistry, and Mathematics.",
+        "In most countries, students must clear entrance exams like JEE (India), SAT (USA), or other regional tests for admission.",
+        "The age limit and eligibility criteria may vary based on the country and institution.",
+        "Most universities require a strong academic record in mathematics and science subjects."
+      ]
+    },
+    {
+      "tag": "engineering_scope",
+      "patterns": [
+        "What are the career options in engineering?",
+        "What can I do after engineering?",
+        "What specializations are available in engineering?",
+        "Can I study abroad after engineering?",
+        "What is the scope of engineering?"
+      ],
+      "responses": [
+        "After engineering, you can work in sectors like IT, construction, manufacturing, aerospace, and more.",
+        "Specializations include Artificial Intelligence, Robotics, Renewable Energy, Data Science, and Software Engineering.",
+        "Studying abroad for a master's degree or certifications can enhance your skills and job prospects.",
+        "Engineers are in demand globally, with opportunities in research, development, management, and entrepreneurship."
+      ]
+    },
+    {
+      "tag": "mbbs_vs_engineering",
+      "patterns": [
+        "Which is better: MBBS or Engineering?",
+        "Should I choose MBBS or Engineering?",
+        "What is the difference between MBBS and Engineering?",
+        "Is MBBS harder than Engineering?",
+        "Which has better career options: MBBS or Engineering?"
+      ],
+      "responses": [
+        "MBBS and Engineering are both excellent fields, but they cater to different interests and skills.",
+        "MBBS is suited for those passionate about healthcare and working with patients, while Engineering is ideal for problem-solvers and innovators.",
+        "The difficulty level depends on your aptitude and dedication; both fields require hard work and commitment.",
+        "Career options in both fields are abundant, ranging from technical roles in Engineering to medical practice in MBBS.",
+        "Choosing between the two depends on your interests, long-term goals, and the type of impact you want to make."
+      ]
+    },
+    {
+      "tag": "mbbs_study_tips",
+      "patterns": [
+        "How do I study for MBBS?",
+        "Tips for MBBS students?",
+        "How do I prepare for MBBS exams?",
+        "What are the best resources for MBBS?",
+        "How do I manage time in MBBS?"
+      ],
+      "responses": [
+        "Create a structured study plan and focus on key subjects like anatomy, physiology, and pathology.",
+        "Use resources like standard textbooks (e.g., Gray's Anatomy, Harrison's Medicine) and online platforms like Lecturio or Medicos.",
+        "Practice diagrams, charts, and case studies to retain information better.",
+        "Stay consistent, manage your time effectively, and take breaks to avoid burnout.",
+        "Join study groups to discuss topics and solve doubts collaboratively."
+      ]
+    },
+    {
+      "tag": "engineering_study_tips",
+      "patterns": [
+        "How do I study for engineering?",
+        "Tips for engineering students?",
+        "How do I prepare for engineering exams?",
+        "What are the best resources for engineering?",
+        "How do I manage time in engineering?"
+      ],
+      "responses": [
+        "Focus on understanding core concepts in subjects like mathematics, physics, and your chosen branch of engineering.",
+        "Use online resources like Coursera, Udemy, or MIT OpenCourseWare to strengthen your knowledge.",
+        "Work on projects, practical applications, and coding challenges to gain hands-on experience.",
+        "Prioritize tasks and create a schedule to manage your academic and extracurricular workload.",
+        "Participate in hackathons, workshops, or internships to apply your learning and build your resume."
+      ]
+    }
+
+
+  ]
+}
