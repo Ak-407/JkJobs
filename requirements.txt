@@ -1,0 +1,13 @@
+Flask
+Werkzeug
+requests
+beautifulsoup4
+authlib
+Flask-Login
+Flask-SQLAlchemy
+torch
+nltk
+numpy
+python-docx
+PyPDF2
+gunicorn
