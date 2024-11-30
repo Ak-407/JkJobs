@@ -12,7 +12,5 @@
             "dest": "app.py"
         }
     ],
-    "env": {
-        "PYTHONPATH": "./"
-    }
+    "ignoreFiles": ["data.pth", "tfidf.pkl", "encoder.pkl"]
 }
